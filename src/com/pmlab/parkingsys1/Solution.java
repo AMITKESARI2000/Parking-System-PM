@@ -10,7 +10,7 @@ public class Solution {
         String yn;
 
         do {
-            //Call Menu
+            parkingLot.showMenu();
             System.out.println("Choose again?(y/n)");
             yn = scanner.next();
         } while (yn.equals("y"));
