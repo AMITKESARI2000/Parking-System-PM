@@ -5,5 +5,5 @@ public interface CallMenu {
     public int showMenu();
 
     //Takes in the option for switching
-    public void functionInvoker(int opt);
+    public void functionInvoker(int option);
 }
