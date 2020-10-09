@@ -30,24 +30,23 @@ public class Customer implements CallMenu {
         for (int i = 0; i < vehicleTypes.length; i++) {
             System.out.println(i + 1 + ": " + vehicleTypes[i]);
         }
-        switch( scanner.nextInt() )
-        {
-        	case 1:
-        		vehicleType = "small";
-        		break;
-        	case 2:
-        		vehicleType = "large";
-        		break;
-        	case 3:
-        		vehicleType = "motorcycle";
-        		break;
-        	case 4:
-        		vehicleType = "handicapped";
-        		break;
-        	default:
-        		System.out.println("Enter valid number");
-        		setVehicleType();
-        		break;
+        switch (scanner.nextInt()) {
+            case 1:
+                vehicleType = "small";
+                break;
+            case 2:
+                vehicleType = "large";
+                break;
+            case 3:
+                vehicleType = "motorcycle";
+                break;
+            case 4:
+                vehicleType = "handicapped";
+                break;
+            default:
+                System.out.println("Enter valid number");
+                setVehicleType();
+                break;
         }
     }
 
@@ -60,16 +59,16 @@ public class Customer implements CallMenu {
     private int option;
 
     @Override
-    public int showMenu() {
+    public void showMenu() {
 
         System.out.println("Choose your option:");
-        String[] functions = new String[]{"Enter User Data"};
+        String[] functions = new String[]{"Enter User Data", "", "Exit"};
         for (int i = 0; i < functions.length; i++) {
             System.out.println(i + 1 + ": " + functions[i]);
         }
         option = scanner.nextInt();
         functionInvoker(option);
-        return option;
+
     }
 
     @Override
@@ -86,6 +85,7 @@ public class Customer implements CallMenu {
                 break;
             }
             case 3: {
+                System.exit(0);
                 break;
             }
 
