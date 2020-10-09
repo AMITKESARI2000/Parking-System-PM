@@ -30,8 +30,25 @@ public class Customer implements CallMenu {
         for (int i = 0; i < vehicleTypes.length; i++) {
             System.out.println(i + 1 + ": " + vehicleTypes[i]);
         }
-        vehicleType = vehicleTypes[scanner.nextInt() - 1];
-        System.out.println("Added : " + vehicleType);
+        switch( scanner.nextInt() )
+        {
+        	case 1:
+        		vehicleType = "small";
+        		break;
+        	case 2:
+        		vehicleType = "large";
+        		break;
+        	case 3:
+        		vehicleType = "motorcycle";
+        		break;
+        	case 4:
+        		vehicleType = "handicapped";
+        		break;
+        	default:
+        		System.out.println("Enter valid number");
+        		setVehicleType();
+        		break;
+        }
     }
 
     public void setStayTime() {
@@ -78,3 +95,6 @@ public class Customer implements CallMenu {
     }
 
 }
+
+
+ 

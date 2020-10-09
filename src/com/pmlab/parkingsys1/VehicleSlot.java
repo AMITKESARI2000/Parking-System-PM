@@ -2,32 +2,29 @@ package com.pmlab.parkingsys1;
 
 import java.util.Scanner;
 
-public class VehicleSlot implements CallMenu {
+public class VehicleSlot{
     Scanner scanner = new Scanner(System.in);
-    private String type = "Normal";
+    private String type ;
     private Boolean occupied = false;
 
-    VehicleSlot() {
-
+    VehicleSlot( String type) {
+    	this.type = type;
     }
 
     //================IMPLEMENT OTHER FUNCTIONS======================
 
-    private int option = 0;
-
-    @Override
-    public int showMenu() {
-
-        System.out.println("Choose your option:");
-        String[] functions = new String[]{"Addition", "Subtraction", "Multiplication", "Division"};
-        for (int i = 0; i < functions.length; i++) {
-            System.out.println(i + 1 + ": " + functions[i]);
-        }
-        option = scanner.nextInt();
-        return option;
+    public String getType( )
+    {
+    	return type;
     }
-    @Override
-    public void functionInvoker(int opt) {
-
+    
+    public void setStatus( boolean occupied )
+    {
+    	this.occupied = occupied;
+    }
+    
+    public boolean getStatus()
+    {
+    	return occupied;
     }
 }
