@@ -54,6 +54,28 @@ public class Customer implements CallMenu {
         System.out.println("Enter Your Parking Time: ");
         stayTime = scanner.nextInt();
         System.out.println("Added : " + stayTime);
+        int rate=0;
+        if(stayTime>0 && stayTime<=60) {
+			rate=20;
+		}
+		if(stayTime>60 && stayTime<=180 ) {
+			if(stayTime<=120)
+				rate=30;
+			else 
+				rate=40;
+		}
+		if(stayTime>180) {
+			stayTime=stayTime-180;
+			if(stayTime%60==0) {
+				stayTime=stayTime/60;
+				rate=40+(stayTime*5);
+			}
+			else {
+				stayTime=stayTime/60;
+				rate=40+(stayTime+1)*5;
+			}
+		}
+        System.out.println("You have to pay "+rate);
     }
 
     private int option;
