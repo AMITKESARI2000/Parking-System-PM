@@ -2,7 +2,7 @@ package com.pmlab.parkingsys1;
 
 import java.util.Scanner;
 
-public class Customer implements CallMenu {
+public class Customer implements CallMenu  {
     Scanner scanner = new Scanner(System.in);
     private float accountBalance = 0;
     private boolean premiumSubscription = false;
@@ -12,8 +12,11 @@ public class Customer implements CallMenu {
             "Motor Bike",
             "Other ( Cycles, Handicapped etc )"
     };
+
+
     private String vehicleType;
     private int stayTime = 0;
+    private int floor_no=0;
 
     Customer() {
     }
@@ -49,6 +52,19 @@ public class Customer implements CallMenu {
                 break;
         }
     }
+
+   public void set_parkingslot_customer()
+    {
+        System.out.println("Enter preferred floor: ");
+         floor_no=scanner.nextInt();
+         boolean check_status=Floors[floor_no].bookslot(vehicleType);
+
+         return check_status;
+    }
+
+
+
+
 
     public void setStayTime() {
         System.out.println("Enter Your Parking Time: ");
