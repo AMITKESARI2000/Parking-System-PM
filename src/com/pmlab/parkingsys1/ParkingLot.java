@@ -24,6 +24,12 @@ public class ParkingLot implements CallMenu {
             floors.add(floor);
         }
     }
+
+    public int getFloorCount(){
+        return floorCount;
+    }
+
+
     //Configure Specific Floor
     public void floorsConfig() {
         displayFloorDetails();
@@ -81,7 +87,8 @@ public class ParkingLot implements CallMenu {
                 break;
             }
             case 4: {
-                System.out.println();
+              //  System.out.println();
+                parkingLot.showMenu();
                 break;
             }
             case 5: {

@@ -146,6 +146,41 @@ public class Floors implements CallMenu {
         return false;
     }
 
+
+
+
+    public boolean exitSlot(String type)
+    {
+        if (type.equals("small"))
+            if (availableSmallSlots()!=smallSlotCount)
+                for (VehicleSlot v : small)
+                    if (v.getStatus() == true) {
+                        v.setStatus(false);
+                        return true;
+                    }
+        if (type.equals("large"))
+            if (availableLargeSlots()!=largeSlotCount)
+                for (VehicleSlot v : large)
+                    if (v.getStatus() == true) {
+                        v.setStatus(false);
+                        return true;
+                    }
+        if (type.equals("handicapped"))
+            if (availableHandicappedSlots()!=handicappedSlotCount)
+                for (VehicleSlot v : handicapped)
+                    if (v.getStatus() == true) {
+                        v.setStatus(false);
+                        return true;
+                    }
+        if (type.equals("motorcycle"))
+            if (availableSmallSlots()!=motorCycleSlotCount)
+                for (VehicleSlot v : motorCycle)
+                    if (v.getStatus() == true) {
+                        v.setStatus(false);
+                        return true;
+                    }
+        return false;
+    }
     public void displayTotalSlots()                        //displays availability information
     {
         System.out.printf("Type            Total Slots    Available Slots%n");
