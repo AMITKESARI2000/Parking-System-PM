@@ -2,7 +2,7 @@ package com.pmlab.parkingsys1;
 
 import java.util.Scanner;
 
-public class Customer implements CallMenu {
+public class Customer extends ParkingLot {
     Scanner scanner = new Scanner(System.in);
     private float accountBalance = 0;
     private boolean premiumSubscription = false;
@@ -12,17 +12,47 @@ public class Customer implements CallMenu {
             "Motor Bike",
             "Other ( Cycles, Handicapped etc )"
     };
+
+
     private String vehicleType;
     private int stayTime = 0;
+    private int floor_no=0;
+    private String CustomerId;
 
     Customer() {
     }
     //================IMPLEMENT OTHER FUNCTIONS======================
 
+    public void setCustomerId(){
+        int n=10;
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    + "0123456789"
+                    + "abcdefghijklmnopqrstuvxyz";
+
+        StringBuilder sb = new StringBuilder(n);
+
+            for (int i = 0; i < n; i++) {
+                int index = (int)(AlphaNumericString.length() * Math.random());
+                sb.append(AlphaNumericString.charAt(index));
+            }
+            CustomerId=sb.toString();
+
+        System.out.println("Customer Id:"+CustomerId);
+    }
+
+    public String getCustomerId()
+    {
+        return CustomerId;
+    }
+
     public void setAccountBalance() {
         System.out.println("Enter Account Balance for Validation of Payment: ");
         this.accountBalance = scanner.nextFloat();
         System.out.println("Added : " + accountBalance);
+    }
+    public float getAccountBalance()
+    {
+        return accountBalance;
     }
 
     public void setVehicleType() {
@@ -49,6 +79,48 @@ public class Customer implements CallMenu {
                 break;
         }
     }
+    public String getvehicleType()
+    {
+        return vehicleType;
+    }
+
+
+   public boolean setParkingLotCustomer()
+    {
+        System.out.println("Enter preferred floor: ");
+         floor_no=scanner.nextInt();
+
+         if(getFloorCount()<floor_no | floor_no<0) {
+             System.out.println("Enter valid number:");
+             return false;
+         }
+         else{
+             boolean check_status = floors.get(floor_no).bookSlot(vehicleType);
+
+             if(check_status) {
+                 System.out.println("Parking has been allotted");
+                 System.out.println("Floor:"+ floor_no);
+                 System.out.println("Slot:"+ vehicleType);
+             }
+
+             return check_status;
+         }
+    }
+
+    public boolean exitParkingLotCustomer()
+    {
+
+        boolean check_status=floors.get(floor_no).exitSlot(vehicleType);
+
+        if(check_status){
+            System.out.println("Exited from Parking Lot");
+        }
+
+        return check_status;
+    }
+
+
+
 
     public void setStayTime() {
         System.out.println("Enter Your Parking Time: ");
@@ -78,13 +150,15 @@ public class Customer implements CallMenu {
         System.out.println("You have to pay "+rate);
     }
 
+
+
     private int option;
 
     @Override
     public void showMenu() {
 
         System.out.println("Choose your option:");
-        String[] functions = new String[]{"Enter User Data", "", "Exit"};
+        String[] functions = new String[]{"Enter User Data", "Set Parking Slot","Exit Parking Slot", "Exit"};
         for (int i = 0; i < functions.length; i++) {
             System.out.println(i + 1 + ": " + functions[i]);
         }
@@ -98,15 +172,21 @@ public class Customer implements CallMenu {
         switch (option) {
             //Add different functions below
             case 1: {
+                setCustomerId();
                 setAccountBalance();
                 setVehicleType();
                 setStayTime();
                 break;
             }
             case 2: {
+                setParkingLotCustomer();
                 break;
             }
             case 3: {
+                exitParkingLotCustomer();
+                break;
+            }
+            case 4: {
                 System.exit(0);
                 break;
             }
