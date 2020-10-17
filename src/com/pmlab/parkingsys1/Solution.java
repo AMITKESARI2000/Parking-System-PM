@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Solution {
-    static public ParkingLot parkingLot = new ParkingLot();
-    static ArrayList<Customer> customerArrayList = new ArrayList<>();
-
-    public static void main(String[] args) {
+    static void showMainMenu() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome To Fantasy Parking Lot!!!");
         String yn = "y";
 
         //Menu For Displaying Options
@@ -25,15 +21,20 @@ public class Solution {
                 //Add different functions below
                 case 1: {
                     //For Admin
-                    parkingLot.showMenu();
-
+                    System.out.println("ENTER ADMIN PASSWORD");
+                    if (scanner.next().equals("1234")) {
+                        parkingLot.showMenu();
+                    } else {
+                        System.out.println("Not Authorized!!!");
+                    }
                     break;
                 }
                 case 2: {
                     //For Customer
+                    System.out.println("Hello Friendly User. Hope we make your stay pleasant ;)");
                     Customer customer = new Customer();
-                    customer.showMenu();
                     customerArrayList.add(customer);
+                    customer.showMenu();
 
                     break;
                 }
@@ -45,10 +46,20 @@ public class Solution {
                 }
                 default:
                     System.out.println("Choose correctly");
+                    showMainMenu();
             }
 
 
         } while (yn.equals("y"));
 
+    }
+
+    static public ParkingLot parkingLot = new ParkingLot();
+    static ArrayList<Customer> customerArrayList = new ArrayList<>();
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome To Fantasy Parking Lot!!!");
+        showMainMenu();
     }
 }

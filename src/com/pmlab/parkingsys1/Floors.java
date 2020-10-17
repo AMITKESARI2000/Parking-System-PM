@@ -3,6 +3,7 @@ package com.pmlab.parkingsys1;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static com.pmlab.parkingsys1.ParkingLot.floorChoice;
 import static com.pmlab.parkingsys1.Solution.parkingLot;
 
 public class Floors implements CallMenu {
@@ -17,11 +18,8 @@ public class Floors implements CallMenu {
     ArrayList<VehicleSlot> motorCycle = new ArrayList<>(0);
     ArrayList<VehicleSlot> handicapped = new ArrayList<>(0);
 
-
     Floors() {
-
     }
-
     //================IMPLEMENT OTHER FUNCTIONS======================
 
     //Configure Specific Floor
@@ -31,9 +29,9 @@ public class Floors implements CallMenu {
         setLargeSlotCount();
         setMotorCycleSlotCount();
         setHandicappedSlotCount();
-
     }
 
+    //Sets Number Of Slots of all 4 types
     public void setSmallSlotCount() {
         System.out.println("Enter number of slots of type 'small' you want: ");
         smallSlotCount = scanner.nextInt();
@@ -52,7 +50,6 @@ public class Floors implements CallMenu {
                 large.add(new VehicleSlot("large"));
         else
             System.out.println("Enter valid Number");
-
     }
 
     public void setHandicappedSlotCount() {
@@ -63,7 +60,6 @@ public class Floors implements CallMenu {
                 handicapped.add(new VehicleSlot("handicaped"));
         else
             System.out.println("Enter valid Number");
-
     }
 
     public void setMotorCycleSlotCount() {
@@ -74,7 +70,6 @@ public class Floors implements CallMenu {
                 motorCycle.add(new VehicleSlot("motorcycle"));
         else
             System.out.println("Enter valid Number");
-
     }
 
     public int availableSmallSlots()                  //returns no of available slots of type small
@@ -146,34 +141,30 @@ public class Floors implements CallMenu {
         return false;
     }
 
-
-
-
-    public boolean exitSlot(String type)
-    {
+    public boolean exitSlot(String type) {
         if (type.equals("small"))
-            if (availableSmallSlots()!=smallSlotCount)
+            if (availableSmallSlots() != smallSlotCount)
                 for (VehicleSlot v : small)
                     if (v.getStatus() == true) {
                         v.setStatus(false);
                         return true;
                     }
         if (type.equals("large"))
-            if (availableLargeSlots()!=largeSlotCount)
+            if (availableLargeSlots() != largeSlotCount)
                 for (VehicleSlot v : large)
                     if (v.getStatus() == true) {
                         v.setStatus(false);
                         return true;
                     }
         if (type.equals("handicapped"))
-            if (availableHandicappedSlots()!=handicappedSlotCount)
+            if (availableHandicappedSlots() != handicappedSlotCount)
                 for (VehicleSlot v : handicapped)
                     if (v.getStatus() == true) {
                         v.setStatus(false);
                         return true;
                     }
         if (type.equals("motorcycle"))
-            if (availableSmallSlots()!=motorCycleSlotCount)
+            if (availableSmallSlots() != motorCycleSlotCount)
                 for (VehicleSlot v : motorCycle)
                     if (v.getStatus() == true) {
                         v.setStatus(false);
@@ -181,6 +172,7 @@ public class Floors implements CallMenu {
                     }
         return false;
     }
+
     public void displayTotalSlots()                        //displays availability information
     {
         System.out.printf("Type            Total Slots    Available Slots%n");
@@ -196,6 +188,7 @@ public class Floors implements CallMenu {
     @Override
     public void showMenu() {
         do {
+            System.out.println("Currently on Floor: " + floorChoice);
             System.out.println("Choose your option:");
             String[] functions = new String[]{"Floor Configuration", "Display Available slots", "Back", "Exit"};
             for (int i = 0; i < functions.length; i++) {
