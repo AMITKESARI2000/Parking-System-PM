@@ -3,14 +3,16 @@ package com.pmlab.parkingsys1;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static com.pmlab.parkingsys1.Solution.customerArrayList;
 import static com.pmlab.parkingsys1.Solution.parkingLot;
 
 public class ParkingLot implements CallMenu {
     Scanner scanner = new Scanner(System.in);
     static private int floorCount;
     static ArrayList<Floors> floors = new ArrayList<>(0);
-
+    long totalEarning=0;
     ParkingLot() {
+
 
     }
 //================IMPLEMENT OTHER FUNCTIONS======================
@@ -54,7 +56,7 @@ public class ParkingLot implements CallMenu {
     public void showMenu() {
 
         System.out.println("Choose your option:");
-        String[] functions = new String[]{"Add Floors", "Floor Details", "Configure Specific Floor", "Back", "Exit"};
+        String[] functions = new String[]{"Add Floors", "Floor Details", "Configure Specific Floor","Show Customer Details", "Back", "Exit"};
         for (int i = 0; i < functions.length; i++) {
             System.out.println(i + 1 + ": " + functions[i]);
         }
