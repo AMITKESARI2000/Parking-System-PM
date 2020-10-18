@@ -70,7 +70,11 @@ public class Customer extends ParkingLot {
         this.accountBalance = scanner.nextFloat();
         System.out.println("Added : " + accountBalance);
     }
+    
+     public void setAccountBalance(float amount){
+         accountBalance=amount;
 
+    } 
 
     public void setVehicleType() {
         System.out.println("Choose Your Vehicle Type: ");
@@ -170,6 +174,10 @@ public class Customer extends ParkingLot {
             System.out.println("Please enter valid time");
         }
     }
+    public int getBill(){
+        return bill;
+    }
+
 
     private int option;
 
@@ -177,7 +185,7 @@ public class Customer extends ParkingLot {
     public void showMenu() {
 
         System.out.println("Choose your option:");
-        String[] functions = new String[]{"Enter User Data", "Set Parking Slot", "Exit Parking Slot", "Back", "Exit"};
+        String[] functions = new String[]{"Enter User Data", "Set Parking Slot","bill", "Exit Parking Slot", "Back", "Exit"};
         for (int i = 0; i < functions.length; i++) {
             System.out.println(i + 1 + ": " + functions[i]);
         }
@@ -207,11 +215,15 @@ public class Customer extends ParkingLot {
                 exitParkingLotCustomer();
                 break;
             }
-            case 4: {
-                showMainMenu();
+            case 4:{
+                System.out.println("your bill is "+getBill());
                 break;
             }
             case 5: {
+                showMainMenu();
+                break;
+            }
+            case 6: {
                 System.exit(0);
                 break;
             }
