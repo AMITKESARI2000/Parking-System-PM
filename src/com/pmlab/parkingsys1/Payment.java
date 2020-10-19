@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class payment implements CallMenu {
     //to know the method of payment
     Scanner scan = new Scanner(System.in);
-    pblic void paymentMethod(){
+    public void paymentMethod(){
         System.out.println("you can pay in 3 ways");
         String[] functions = new String[]{"cash", "debit / creditcard", "pay to attender","pay from your premium account", "exit"};
         for (int i = 0; i < functions.length; i++) {
