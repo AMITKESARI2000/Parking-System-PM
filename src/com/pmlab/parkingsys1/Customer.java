@@ -155,16 +155,16 @@ public class Customer extends ParkingLot {
     public void setBill() {
         float baseRate;interest=10;
         if(vehicleType=="small") {
-        	baseRate=30;
-        }
-        else if(vehicleType=="large") {
         	baseRate=50;
         }
+        else if(vehicleType=="large") {
+        	baseRate=80;
+        }
         else if(vehicleType=="motorcycle") {
-        	baseRate=25;
+        	baseRate=40;
         }
         else if(vehicleType=="handicapped") {
-        	baseRate=15;
+        	baseRate=20;
         }
         System.out.println("Enter Your Parking Stay Time (in hrs): ");
         stayTime = scanner.nextInt();
