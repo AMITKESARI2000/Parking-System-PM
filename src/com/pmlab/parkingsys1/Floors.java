@@ -12,25 +12,30 @@ public class Floors implements CallMenu {
     private int largeSlotCount = 4;
     private int handicappedSlotCount = 4;
     private int motorCycleSlotCount = 4;
+    private int electricSlotCount = 4;
 
     ArrayList<VehicleSlot> small = new ArrayList<>(0);
     ArrayList<VehicleSlot> large = new ArrayList<>(0);
     ArrayList<VehicleSlot> motorCycle = new ArrayList<>(0);
     ArrayList<VehicleSlot> handicapped = new ArrayList<>(0);
+    ArrayList<VehicleSlot> electric = new ArrayList<>(0);
 
     Floors() {
 
-        for (int i = 0; i < smallSlotCount; i++)
+        for ( int i = 0 ; i < smallSlotCount ; i++ )
             small.add(new VehicleSlot("small"));
 
-        for (int i = 0; i < largeSlotCount; i++)
+        for ( int i = 0 ; i < largeSlotCount ; i++ )
             large.add(new VehicleSlot("large"));
 
-        for (int i = 0; i < handicappedSlotCount; i++)
+        for ( int i = 0 ; i < handicappedSlotCount ; i++ )
             handicapped.add(new VehicleSlot("handicaped"));
 
-        for (int i = 0; i < motorCycleSlotCount; i++)
+        for ( int i = 0 ; i < motorCycleSlotCount ; i++ )
             motorCycle.add(new VehicleSlot("motorcycle"));
+        
+        for ( int i = 0 ; i < electricSlotCount ; i++ )
+        	electric.add(new VehicleSlot("electric"));
 
     }
     //================IMPLEMENT OTHER FUNCTIONS======================
@@ -42,9 +47,10 @@ public class Floors implements CallMenu {
         setLargeSlotCount();
         setMotorCycleSlotCount();
         setHandicappedSlotCount();
+        setElectricSlotCount();
     }
 
-    //Sets Number Of Slots of all 4 types
+    //Sets Number Of Slots of all 5 types
     public void setSmallSlotCount() {
 
         small.clear();
@@ -75,7 +81,7 @@ public class Floors implements CallMenu {
         handicappedSlotCount = scanner.nextInt();
         if (handicappedSlotCount >= 0)
             for (int i = 0; i < handicappedSlotCount; i++)
-                handicapped.add(new VehicleSlot("handicaped"));
+                handicapped.add(new VehicleSlot("handicapped"));
         else
             System.out.println("Enter valid Number");
     }
@@ -91,6 +97,17 @@ public class Floors implements CallMenu {
             System.out.println("Enter valid Number");
     }
 
+    public void setElectricSlotCount() {
+        electric.clear();
+        System.out.println("Enter number of slots of type 'electric' you want: ");
+        electricSlotCount = scanner.nextInt();
+        if (electricSlotCount >= 0)
+            for (int i = 0; i < electricSlotCount; i++)
+                electric.add(new VehicleSlot("electric"));
+        else
+            System.out.println("Enter valid Number");
+    }
+    
     public int availableSmallSlots()                  //returns no of available slots of type small
     {
         int i = 0;
@@ -127,40 +144,73 @@ public class Floors implements CallMenu {
         return i;
     }
 
-    public boolean bookSlot(String type)            //takes vehicleType as input and return true if
-    {                                                 //a VehicleSlot of that type is booked
-        if (type.equals("small"))                     //returns false if no VehicleSlot is free for the given vehicleType
-            if (availableSmallSlots() > 0)
-                for (VehicleSlot v : small)
-                    if (v.getStatus() == false) {
-                        v.setStatus(true);
-                        return true;
+    public int availableElectricSlots()            //returns no of available slots of type electric
+    {
+        int i = 0;
+        for (VehicleSlot v : electric)
+            if (v.getStatus() == false)
+                i++;
+        return i;
+    }
+    
+    public String bookSlot(String type , int floor)     //takes vehicleType and floor_no as input and returns id of 
+    {      											    //that venhicleSlot if a VehicleSlot of that type is booked
+    	String id = "F"+String.valueOf(floor);          //returns empty string if no VehicleSlot is free for the given vehicleType
+    	
+        if (type.equals("small"))                     
+                for ( int i = 0 ; i < small.size() ; i++ )
+                    if (small.get(i).getStatus() == false) 
+                    {
+                        small.get(i).setStatus(true);
+                        id = "s" + String.valueOf(i);
+                        return id;
                     }
-        if (type.equals("large"))
+        
+        if (type.equals("large"))                      
             if (availableLargeSlots() > 0)
-                for (VehicleSlot v : large)
-                    if (v.getStatus() == false) {
-                        v.setStatus(true);
-                        return true;
+                for ( int i = 0 ; i < large.size() ; i++ )
+                    if (large.get(i).getStatus() == false) 
+                    {
+                        large.get(i).setStatus(true);
+                        id = "l" + String.valueOf(i);
+                        return id;
                     }
-        if (type.equals("handicapped"))
+        
+        if (type.equals("handicapped"))                      
             if (availableHandicappedSlots() > 0)
-                for (VehicleSlot v : handicapped)
-                    if (v.getStatus() == false) {
-                        v.setStatus(true);
-                        return true;
+                for ( int i = 0 ; i < handicapped.size() ; i++ )
+                    if (handicapped.get(i).getStatus() == false) 
+                    {
+                        handicapped.get(i).setStatus(true);
+                        id = "h" + String.valueOf(i);
+                        return id;
                     }
-        if (type.equals("motorcycle"))
-            if (availableSmallSlots() > 0)
-                for (VehicleSlot v : motorCycle)
-                    if (v.getStatus() == false) {
-                        v.setStatus(true);
-                        return true;
+        
+        if (type.equals("motorcycle"))                      
+            if (availableMotorCycleSlots() > 0)
+                for ( int i = 0 ; i < motorCycle.size() ; i++ )
+                    if (motorCycle.get(i).getStatus() == false) 
+                    {
+                        motorCycle.get(i).setStatus(true);
+                        id = "m" + String.valueOf(i);
+                        return id;
                     }
-        return false;
+        
+        if (type.equals("electric"))                      
+            if (availableElectricSlots() > 0)
+                for ( int i = 0 ; i < electric.size() ; i++ )
+                    if (electric.get(i).getStatus() == false) 
+                    {
+                        electric.get(i).setStatus(true);
+                        id = "e" + String.valueOf(i);
+                        return id;
+                    }
+        
+        return "";
     }
 
-    public boolean exitSlot(String type) {
+    public boolean exitSlot(String type) 
+    {
         if (type.equals("small"))
             if (availableSmallSlots() != smallSlotCount)
                 for (VehicleSlot v : small)
@@ -189,6 +239,14 @@ public class Floors implements CallMenu {
                         v.setStatus(false);
                         return true;
                     }
+        
+        if (type.equals("electric"))
+            if (availableElectricSlots() != electricSlotCount)
+                for (VehicleSlot v : electric)
+                    if (v.getStatus() == true) {
+                        v.setStatus(false);
+                        return true;
+                    }
         return false;
     }
 
@@ -199,6 +257,7 @@ public class Floors implements CallMenu {
         System.out.printf("%-12s%10d%17d\n", "large", largeSlotCount, availableLargeSlots());
         System.out.printf("%-12s%10d%17d\n", "handicapped", handicappedSlotCount, availableHandicappedSlots());
         System.out.printf("%-12s%10d%17d\n", "motorcycle", motorCycleSlotCount, availableMotorCycleSlots());
+        System.out.printf("%-12s%10d%17d\n", "electric" , electricSlotCount, availableElectricSlots());
 
     }
 
@@ -244,3 +303,4 @@ public class Floors implements CallMenu {
     }
 
 }
+

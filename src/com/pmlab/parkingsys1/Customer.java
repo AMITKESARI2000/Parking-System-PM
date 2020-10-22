@@ -10,7 +10,8 @@ public class Customer extends ParkingLot {
             "Small ( Sedans, Compact etc ) ",
             "Large ( Truck, SUV etc )",
             "Motor Bike",
-            "Other ( Cycles, Handicapped etc )"
+            "Handicapped",
+            "Electric"
     };
 
     private String username = "";
@@ -120,19 +121,21 @@ public class Customer extends ParkingLot {
             System.out.println("Enter valid number :(");
             return false;
         } else {
-            boolean check_status = floors.get(floor_no).bookSlot(vehicleType);
+            String check_status = floors.get(floor_no).bookSlot(vehicleType,floor_no);
 
-            if (check_status) {
+            if (!check_status.equals("")) {
                 System.out.println("Parking Slot has been allotted");
                 System.out.println("Floor: " + floor_no);
                 System.out.println("Slot: " + vehicleType);
+                System.out.println("Parking Slot ID: " + check_status);
                 if (premiumSubscription)
                     System.out.println("Enjoy your premium stay!");
                 setBill();
+                return true;
             } else {
                 System.out.println("Error in slot allotment");
             }
-            return check_status;
+            return false;
         }
     }
 
