@@ -59,7 +59,7 @@ public class ParkingLot implements CallMenu {
     }
 
     public void displayCustomerDetails() {
-        if (floorCount <= 0) {
+        if (customerArrayList.size() <= 0) {
             System.out.println("No Customer in DataBase!");
             return;
         } else {
