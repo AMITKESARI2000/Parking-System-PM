@@ -70,11 +70,11 @@ public class Customer extends ParkingLot {
         this.accountBalance = scanner.nextFloat();
         System.out.println("Added : " + accountBalance);
     }
-    
-     public void setAccountBalance(float amount){
-         accountBalance=amount;
 
-    } 
+    public void setAccountBalance(float amount) {
+        accountBalance = amount;
+
+    }
 
     public void setVehicleType() {
         System.out.println("Choose Your Vehicle Type: ");
@@ -107,7 +107,7 @@ public class Customer extends ParkingLot {
             premiumSubscription = true;
             System.out.println("Verified!");
         } else {
-            System.out.println("Please buy a Subscription");
+            System.out.println("You are not a premium customer. Please don't fake it and buy a Subscription");
         }
     }
 
@@ -153,18 +153,15 @@ public class Customer extends ParkingLot {
     }
 
     public void setBill() {
-        float baseRate;interest=10;
-        if(vehicleType=="small") {
-        	baseRate=50;
-        }
-        else if(vehicleType=="large") {
-        	baseRate=80;
-        }
-        else if(vehicleType=="motorcycle") {
-        	baseRate=40;
-        }
-        else if(vehicleType=="handicapped") {
-        	baseRate=20;
+        float baseRate = 20, interest = 10;
+        if (vehicleType == "small") {
+            baseRate = 50;
+        } else if (vehicleType == "large") {
+            baseRate = 80;
+        } else if (vehicleType == "motorcycle") {
+            baseRate = 40;
+        } else if (vehicleType == "handicapped") {
+            baseRate = 20;
         }
         System.out.println("Enter Your Parking Stay Time (in hrs): ");
         stayTime = scanner.nextInt();
@@ -186,7 +183,8 @@ public class Customer extends ParkingLot {
             System.out.println("Please enter valid time");
         }
     }
-    public int getBill(){
+
+    public float getBill() {
         return bill;
     }
 
@@ -197,7 +195,7 @@ public class Customer extends ParkingLot {
     public void showMenu() {
 
         System.out.println("Choose your option:");
-        String[] functions = new String[]{"Enter User Data", "Set Parking Slot","bill", "Exit Parking Slot", "Back", "Exit"};
+        String[] functions = new String[]{"Enter User Data", "Book Parking Slot", "bill", "Pay and Exit Parking Slot", "Back", "Exit"};
         for (int i = 0; i < functions.length; i++) {
             System.out.println(i + 1 + ": " + functions[i]);
         }
@@ -221,14 +219,19 @@ public class Customer extends ParkingLot {
             }
             case 2: {
                 setParkingLotCustomer();
+                showMenu();
+
                 break;
             }
             case 3: {
-                exitParkingLotCustomer();
+                System.out.println("your bill is " + getBill());
+                showMenu();
                 break;
             }
-            case 4:{
-                System.out.println("your bill is "+getBill());
+            case 4: {
+                Payment pay=new Payment();
+                pay.showMenu();
+                exitParkingLotCustomer();
                 break;
             }
             case 5: {

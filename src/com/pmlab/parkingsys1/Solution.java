@@ -32,11 +32,29 @@ public class Solution {
                 case 2: {
                     //For Customer
                     System.out.println("Hello Friendly User. Hope we make your stay pleasant ;)");
-                    Customer customer = new Customer();
-                    customerArrayList.add(customer);
-                    customer.showMenu();
+                    System.out.println("Are you an existing Customer (y/n)?");
+                    String y = scanner.next();
+                    if (y.charAt(0) == 'y') {
+                        System.out.println("Enter Username");
+                        String userName = scanner.next();
+                        for (int i = 0; i < customerArrayList.size(); i++) {
+                            if (userName.equals(customerArrayList.get(i).getUsername())) {
+                                System.out.println("Username:" + userName);
+
+                                customerArrayList.get(i).showMenu();
+                                break;
+
+                            }
+                        }
+                    } else {
+                        Customer customer = new Customer();
+                        customerArrayList.add(customer);
+                        customer.showMenu();
+                    }
+
 
                     break;
+
                 }
                 case 3: {
                     //For Exit from Program

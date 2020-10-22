@@ -7,11 +7,17 @@ import static com.pmlab.parkingsys1.Solution.*;
 
 public class ParkingLot implements CallMenu {
     Scanner scanner = new Scanner(System.in);
-    static private int floorCount;
+    static private int floorCount=3;
     static ArrayList<Floors> floors = new ArrayList<>(0);
+
     long totalEarning = 0;
 
     ParkingLot() {
+
+        for (int i = 0; i < floorCount; i++) {
+            Floors floor = new Floors();
+            floors.add(floor);
+        }
 
 
     }
@@ -19,7 +25,8 @@ public class ParkingLot implements CallMenu {
 
     //Adds floors to Parking System
     public void setFloorCount() {
-        System.out.println("Enter the number of floors you want to add: ");
+        floors.clear();
+        System.out.println("Enter the number of floors you want to set: ");
         floorCount = scanner.nextInt();
         for (int i = 0; i < floorCount; i++) {
             Floors floor = new Floors();
@@ -59,7 +66,7 @@ public class ParkingLot implements CallMenu {
     }
 
     public void displayCustomerDetails() {
-        if (floorCount <= 0) {
+        if (customerArrayList.size() <= 0) {
             System.out.println("No Customer in DataBase!");
             return;
         } else {
@@ -82,7 +89,7 @@ public class ParkingLot implements CallMenu {
     public void showMenu() {
 
         System.out.println("Choose your option:");
-        String[] functions = new String[]{"Add Floors", "Floor Details", "Configure Specific Floor",
+        String[] functions = new String[]{"Set Floors", "Floor Details", "Configure Specific Floor",
                 "Show Customer Details", "Back", "Exit"};
         for (int i = 0; i < functions.length; i++) {
             System.out.println(i + 1 + ": " + functions[i]);

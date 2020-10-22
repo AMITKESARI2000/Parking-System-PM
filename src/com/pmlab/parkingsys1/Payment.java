@@ -2,7 +2,7 @@ package com.pmlab.parkingsys1;
 
 import java.util.Scanner;
 
-public class Payment  extends Customer implements CallMenu {
+public class Payment  extends Customer {
     //to know the method of payment
     Scanner scan = new Scanner(System.in);
     public void paymentMethod() {

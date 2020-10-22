@@ -8,10 +8,10 @@ import static com.pmlab.parkingsys1.Solution.parkingLot;
 
 public class Floors implements CallMenu {
     Scanner scanner = new Scanner(System.in);
-    private int smallSlotCount = 0;
-    private int largeSlotCount = 0;
-    private int handicappedSlotCount = 0;
-    private int motorCycleSlotCount = 0;
+    private int smallSlotCount = 4;
+    private int largeSlotCount = 4;
+    private int handicappedSlotCount = 4;
+    private int motorCycleSlotCount = 4;
 
     ArrayList<VehicleSlot> small = new ArrayList<>(0);
     ArrayList<VehicleSlot> large = new ArrayList<>(0);
@@ -19,6 +19,19 @@ public class Floors implements CallMenu {
     ArrayList<VehicleSlot> handicapped = new ArrayList<>(0);
 
     Floors() {
+
+        for (int i = 0; i < smallSlotCount; i++)
+            small.add(new VehicleSlot("small"));
+
+        for (int i = 0; i < largeSlotCount; i++)
+            large.add(new VehicleSlot("large"));
+
+        for (int i = 0; i < handicappedSlotCount; i++)
+            handicapped.add(new VehicleSlot("handicaped"));
+
+        for (int i = 0; i < motorCycleSlotCount; i++)
+            motorCycle.add(new VehicleSlot("motorcycle"));
+
     }
     //================IMPLEMENT OTHER FUNCTIONS======================
 
@@ -33,8 +46,11 @@ public class Floors implements CallMenu {
 
     //Sets Number Of Slots of all 4 types
     public void setSmallSlotCount() {
+
+        small.clear();
         System.out.println("Enter number of slots of type 'small' you want: ");
         smallSlotCount = scanner.nextInt();
+
         if (smallSlotCount >= 0)
             for (int i = 0; i < smallSlotCount; i++)
                 small.add(new VehicleSlot("small"));
@@ -43,6 +59,7 @@ public class Floors implements CallMenu {
     }
 
     public void setLargeSlotCount() {
+        large.clear();
         System.out.println("Enter number of slots of type 'large' you want: ");
         largeSlotCount = scanner.nextInt();
         if (largeSlotCount >= 0)
@@ -53,6 +70,7 @@ public class Floors implements CallMenu {
     }
 
     public void setHandicappedSlotCount() {
+        handicapped.clear();
         System.out.println("Enter number of slots of type 'handicapped' you want: ");
         handicappedSlotCount = scanner.nextInt();
         if (handicappedSlotCount >= 0)
@@ -63,6 +81,7 @@ public class Floors implements CallMenu {
     }
 
     public void setMotorCycleSlotCount() {
+        motorCycle.clear();
         System.out.println("Enter number of slots of type 'motorcycle' you want: ");
         motorCycleSlotCount = scanner.nextInt();
         if (motorCycleSlotCount >= 0)
