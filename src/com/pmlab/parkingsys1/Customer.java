@@ -97,6 +97,7 @@ public class Customer extends ParkingLot {
                 break;
             case 5:
                 vehicleType="Electric";
+                break;
             default:
                 System.out.println("Enter valid number");
                 setVehicleType();
