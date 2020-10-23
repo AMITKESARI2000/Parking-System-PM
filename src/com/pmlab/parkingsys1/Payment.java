@@ -2,12 +2,24 @@ package com.pmlab.parkingsys1;
 
 import java.util.Scanner;
 
-public class Payment  extends Customer {
+public class Payment implements CallMenu {
     //to know the method of payment
     Scanner scan = new Scanner(System.in);
+    private float bill;
+    private float balance;
+    private boolean premiumSubscription = false;
+    private float amount;
+
+    Payment(float bill, float balance, boolean premiumSubscription) {
+        this.bill = bill;
+        this.balance = balance;
+        this.premiumSubscription = premiumSubscription;
+        amount=balance;
+    }
+
     public void paymentMethod() {
         System.out.println("you can pay in 3 ways");
-        String[] functions = new String[]{"cash", "debit / credit card", "pay to attender", "pay from your premium account", "exit"};
+        String[] functions = new String[]{"cash", "debit / credit card", "pay to attender", "Use Premimum account","exit"};
         for (int i = 0; i < functions.length; i++) {
             System.out.println(i + 1 + ": " + functions[i]);
         }
@@ -16,10 +28,15 @@ public class Payment  extends Customer {
 
     }
 
+    public float getAmount() {
+        System.out.println("Account Balance:"+ amount);
+        return amount;
+    }
+
     @Override
     public void showMenu() {
         System.out.println("welcome to the payment counter");
-        System.out.println("your bill" + getBill());
+        System.out.println("your bill" + bill);
         String[] where = new String[]{"pay at floor customer info", "pay at exit gate", "exit"};
         for (int i = 0; i < where.length; i++) {
             System.out.println(i + 1 + ": " + where[i]);
@@ -39,37 +56,51 @@ public class Payment  extends Customer {
         switch (option1) {
             //Add different functions below
             case 1: {
-                System.out.println("you paid " + getBill());
+                System.out.println("you paid " + bill);
 
                 break;
             }
             case 2: {
-                System.out.println(getBill() + "rupees has been deducted from your credit card");
 
+                if (balance >= bill) {
+                    System.out.println(bill +"rupees has been deducted from your credit card");
+
+                    amount = balance - bill;
+
+
+                } else {
+
+                    System.out.println("your account balance is not sufficient");
+                    System.out.println("Select Another method of payment");
+                    paymentMethod();
+
+                }
                 break;
             }
             case 3: {
-                System.out.println(getBill() + "rupees should be paid to our attender");
+                System.out.println(bill + "rupees should be paid to our attender");
 
                 break;
             }
             case 4: {
-                if (getAccountBalance() >= getBill()) {
-                    System.out.println(getBill() + "rupees has been deducted from your premium account");
-                    setAccountBalance(getAccountBalance() - getBill());
-                } else {
-                    if (getAccountBalance() > 0) {
-                        System.out.println("yo have to pay" + (getBill() - getAccountBalance()));
-                        System.out.println("remaining amount will be deducted from your premium account balance");
-                        setAccountBalance(0);
-                    } else if (getAccountBalance() == 0) {
-                        System.out.println("your acc balance is 0 please choose another payment option");
-
-                        paymentMethod();
+                if (premiumSubscription) {
+                    if (balance >= bill) {
+                        System.out.println(bill + "rupees has been deducted from your premium account");
+                        amount = balance - bill;
                     }
+
+                } else {
+
+                    System.out.println("your account balance is not sufficient");
+                    System.out.println("Select Another method of payment");
+                    paymentMethod();
+
                 }
                 break;
             }
+
+
+
 
             case 5: {
                 System.exit(0);
