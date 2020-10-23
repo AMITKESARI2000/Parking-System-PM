@@ -95,6 +95,8 @@ public class Customer extends ParkingLot {
             case 4:
                 vehicleType = "handicapped";
                 break;
+            case 5:
+                vehicleType="Electric";
             default:
                 System.out.println("Enter valid number");
                 setVehicleType();
@@ -165,6 +167,8 @@ public class Customer extends ParkingLot {
             baseRate = 40;
         } else if (vehicleType == "handicapped") {
             baseRate = 20;
+        }else if(vehicleType=="Electric") {
+            baseRate=30;
         }
         System.out.println("Enter Your Parking Stay Time (in hrs): ");
         stayTime = scanner.nextInt();
