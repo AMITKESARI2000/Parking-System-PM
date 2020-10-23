@@ -72,10 +72,10 @@ public class Customer extends ParkingLot {
         System.out.println("Added : " + accountBalance);
     }
 
-    public void setAccountBalance(float amount) {
+   /* public void setAccountBalance(float amount) {
         accountBalance = amount;
 
-    }
+    }*/
 
     public void setVehicleType() {
         System.out.println("Choose Your Vehicle Type: ");
@@ -237,8 +237,9 @@ public class Customer extends ParkingLot {
                 break;
             }
             case 4: {
-                Payment pay=new Payment();
+                Payment pay=new Payment(bill,accountBalance,premiumSubscription);
                 pay.showMenu();
+                accountBalance=pay.getAmount();
                 exitParkingLotCustomer();
                 break;
             }
