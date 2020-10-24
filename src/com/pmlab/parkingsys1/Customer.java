@@ -92,7 +92,7 @@ public class Customer extends ParkingLot {
         } catch (Exception e) {
             System.out.println("Please enter valid input");
             System.out.println("Balance set to 0 OR");
-            accountBalance=0;
+            accountBalance = 0;
             setAccountBalance();
         }
 
@@ -128,11 +128,16 @@ public class Customer extends ParkingLot {
 
     public void setPremiumSubscription() {
         System.out.println("Are you our premium customer? (y/n)");
-        if (scanner.next().equals("y") && accountBalance > 1000) {
+        String ps = scanner.next();
+        if (ps.toLowerCase().equals("y") && accountBalance > 1000) {
             premiumSubscription = true;
             System.out.println("Verified!");
-        } else {
+        } else if (ps.equals("y") && accountBalance < 1000) {
             System.out.println("You are not a premium customer. Please don't fake it and buy a Subscription");
+            premiumSubscription = false;
+        } else {
+            premiumSubscription = false;
+            System.out.println("OK");
         }
     }
 
@@ -221,7 +226,7 @@ public class Customer extends ParkingLot {
     public void showMenu() {
 
         System.out.println("Choose your option:");
-        String[] functions = new String[]{"Edit User Data", "Book Parking Slot", "Show Bill", "Pay and Exit Parking Slot", "Back", "Exit"};
+        String[] functions = new String[]{"Edit User Data","Display Available Slots", "Book Parking Slot", "Show Bill", "Pay and Exit Parking Slot", "Back", "Exit"};
         for (int i = 0; i < functions.length; i++) {
             System.out.println(i + 1 + ": " + functions[i]);
         }
@@ -243,28 +248,33 @@ public class Customer extends ParkingLot {
                 showMenu();
                 break;
             }
-            case 2: {
-                setParkingLotCustomer();
+            case 2:{
+                displayFloorDetails();
                 showMenu();
                 break;
             }
             case 3: {
-                System.out.println("Your bill is " + getBill());
+                setParkingLotCustomer();
                 showMenu();
                 break;
             }
             case 4: {
+                System.out.println("Your bill is " + getBill());
+                showMenu();
+                break;
+            }
+            case 5: {
                 Payment pay = new Payment(bill, accountBalance, premiumSubscription);
                 pay.showMenu();
                 accountBalance = pay.getAmount();
                 exitParkingLotCustomer();
                 break;
             }
-            case 5: {
+            case 6: {
                 showMainMenu();
                 break;
             }
-            case 6: {
+            case 7: {
                 System.exit(0);
                 break;
             }
