@@ -264,7 +264,10 @@ public class Customer extends ParkingLot {
                 break;
             }
             case 4: {
-                System.out.println("Your bill is " + getBill());
+                if(getBill()>0)
+                    System.out.println("Your bill is " + getBill());
+                else
+                    System.out.println("Book a slot first");
                 showMenu();
                 break;
             }

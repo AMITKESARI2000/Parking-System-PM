@@ -2,9 +2,9 @@ package com.pmlab.parkingsys1;
 
 import java.util.Scanner;
 
+//To know the method of payment
 public class Payment implements CallMenu {
-    //to know the method of payment
-    Scanner scan = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
     private float bill;
     private float balance;
     private boolean premiumSubscription = false;
@@ -14,41 +14,44 @@ public class Payment implements CallMenu {
         this.bill = bill;
         this.balance = balance;
         this.premiumSubscription = premiumSubscription;
-        amount=balance;
-    }
-
-    public void paymentMethod() {
-        System.out.println("you can pay in 3 ways");
-        String[] functions = new String[]{"cash", "debit / credit card", "pay to attender", "Use Premimum account","exit"};
-        for (int i = 0; i < functions.length; i++) {
-            System.out.println(i + 1 + ": " + functions[i]);
-        }
-        int option1 = scan.nextInt();
-        functionInvoker(option1);
-
+        amount = balance;
     }
 
     public float getAmount() {
-        System.out.println("Account Balance:"+ amount);
+        System.out.println("Account Balance:" + amount);
         return amount;
     }
 
     @Override
     public void showMenu() {
-        System.out.println("welcome to the payment counter");
-        System.out.println("your bill" + bill);
-        String[] where = new String[]{"pay at floor customer info", "pay at exit gate", "exit"};
+        System.out.println("Welcome to the payment counter");
+        System.out.println("Your bill: Rs" + bill);
+        String[] where = new String[]{"Pay at floor customer info", "Pay at exit gate", "Exit"};
         for (int i = 0; i < where.length; i++) {
             System.out.println(i + 1 + ": " + where[i]);
         }
-        int option = scan.nextInt();
+        int option = scanner.nextInt();
         if (option == 1 || option == 2) {
             paymentMethod();
         }
         if (option == 3) {
             return;
         }
+    }
 
+    public void paymentMethod() {
+        try {
+            System.out.println("You can pay in 4 ways");
+            String[] functions = new String[]{"Cash", "Debit / Credit card", "Pay to Attender", "Use Premium account", "Exit"};
+            for (int i = 0; i < functions.length; i++) {
+                System.out.println(i + 1 + ": " + functions[i]);
+            }
+            int option1 = scanner.nextInt();
+            functionInvoker(option1);
+        } catch (Exception e) {
+            System.out.println("Enter Valid input.");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -56,74 +59,46 @@ public class Payment implements CallMenu {
         switch (option1) {
             //Add different functions below
             case 1: {
-                System.out.println("you paid " + bill);
-
+                System.out.println("You paid: Rs " + bill);
                 break;
             }
             case 2: {
-
                 if (balance >= bill) {
-
-                    System.out.println(bill);
-                    System.out.println("rupees has been deducted from your credit card");
-
-
-
+                    System.out.println("Rs" + bill + " has been deducted from your credit card");
                     amount = balance - bill;
-
-
                 } else {
-
-                    System.out.println("your account balance is not sufficient");
+                    System.out.println("Your account balance is not sufficient");
                     System.out.println("Select Another method of payment");
                     paymentMethod();
-
                 }
                 break;
             }
             case 3: {
-                System.out.println(bill + "rupees should be paid to our attender");
-
+                System.out.println("Rs" + bill + " should be paid to our attender");
                 break;
             }
             case 4: {
                 if (premiumSubscription) {
                     if (balance >= bill) {
-                        System.out.println(bill + "rupees has been deducted from your premium account");
+                        System.out.println("Rs" + bill + " has been deducted from your premium account");
                         amount = balance - bill;
                     }
-
                 } else {
-
-                    System.out.println("your account balance is not sufficient");
+                    System.out.println("Your account balance is not sufficient");
                     System.out.println("Select Another method of payment");
                     paymentMethod();
-
                 }
                 break;
             }
-
-
-
-
-
             case 5: {
                 System.exit(0);
                 break;
             }
-
-
-
-
-
-
-        default:
-        System.out.println("Choose correctly");
+            default:
+                System.out.println("Choose correctly");
+                paymentMethod();
+        }
     }
-
-
-
-}
 }
 
 
