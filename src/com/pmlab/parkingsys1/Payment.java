@@ -63,12 +63,11 @@ public class Payment implements CallMenu {
             case 2: {
 
                 if (balance >= bill) {
-<<<<<<< HEAD
+
                     System.out.println(bill);
                     System.out.println("rupees has been deducted from your credit card");
-=======
-                    System.out.println(bill +"rupees has been deducted from your credit card");
->>>>>>> 5a2ff05b829ca7b0277d616a3da277520b563957
+
+
 
                     amount = balance - bill;
 
@@ -104,8 +103,7 @@ public class Payment implements CallMenu {
                 break;
             }
 
-<<<<<<< HEAD
-=======
+
 
 
 
@@ -113,23 +111,20 @@ public class Payment implements CallMenu {
                 System.exit(0);
                 break;
             }
->>>>>>> 5a2ff05b829ca7b0277d616a3da277520b563957
 
 
 
-        case 5: {
-            System.exit(0);
-            break;
-        }
+
+
 
         default:
         System.out.println("Choose correctly");
     }
-<<<<<<< HEAD
 
 
+
 }
 }
-=======
-}
->>>>>>> 5a2ff05b829ca7b0277d616a3da277520b563957
+
+
+
