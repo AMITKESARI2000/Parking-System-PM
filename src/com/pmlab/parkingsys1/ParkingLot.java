@@ -118,6 +118,14 @@ public class ParkingLot implements CallMenu {
 
         return true;
     }
+    public void reset(){
+        floorcount=3;
+        smallSlotCount=4;
+        largeSlotCount=4;
+        handicappedSlotCount=4;
+        motorCycleSlotCount=4;
+        electricSlotCount=4;
+    }
 
     @Override
     public void showMenu() {
@@ -178,6 +186,10 @@ public class ParkingLot implements CallMenu {
             case 6: {
                 System.out.println("Tata Bye!!! Have a Great Day ;)");
                 System.exit(0);
+                break;
+            }
+            case 7:{
+                reset();
                 break;
             }
             default:
