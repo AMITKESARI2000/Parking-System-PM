@@ -22,6 +22,7 @@ public class Customer extends ParkingLot {
     private int stayTime = 0;
     private int floor_no = 0;
     private float bill = 0;
+    private boolean parkingStatus = false;
 
     Customer() {
         setUsername();
@@ -219,6 +220,9 @@ public class Customer extends ParkingLot {
         return bill;
     }
 
+    public boolean getParkingStatus() {
+        return parkingStatus;
+    }
 
     private int option;
 
@@ -226,7 +230,7 @@ public class Customer extends ParkingLot {
     public void showMenu() {
 
         System.out.println("Choose your option:");
-        String[] functions = new String[]{"Edit User Data","Display Available Slots", "Book Parking Slot", "Show Bill", "Pay and Exit Parking Slot", "Back", "Exit"};
+        String[] functions = new String[]{"Edit User Data", "Display Available Slots", "Book Parking Slot", "Show Bill", "Pay and Exit Parking Slot", "Back", "Exit"};
         for (int i = 0; i < functions.length; i++) {
             System.out.println(i + 1 + ": " + functions[i]);
         }
@@ -248,13 +252,14 @@ public class Customer extends ParkingLot {
                 showMenu();
                 break;
             }
-            case 2:{
+
+            case 2: {
                 displayFloorDetails();
                 showMenu();
                 break;
             }
             case 3: {
-                setParkingLotCustomer();
+                parkingStatus = setParkingLotCustomer();
                 showMenu();
                 break;
             }
@@ -267,7 +272,8 @@ public class Customer extends ParkingLot {
                 Payment pay = new Payment(bill, accountBalance, premiumSubscription);
                 pay.showMenu();
                 accountBalance = pay.getAmount();
-                exitParkingLotCustomer();
+                parkingStatus = !(exitParkingLotCustomer());
+
                 break;
             }
             case 6: {
