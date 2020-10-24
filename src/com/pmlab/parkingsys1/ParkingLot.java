@@ -85,6 +85,18 @@ public class ParkingLot implements CallMenu {
 
     private int option = 0;
 
+    public boolean getParking()
+    {
+        for(int i=0;i<customerArrayList.size();i++) {
+            if(customerArrayList.get(i).getParkingStatus())
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     @Override
     public void showMenu() {
 
@@ -103,10 +115,14 @@ public class ParkingLot implements CallMenu {
         switch (option) {
             //Add different functions below
             case 1: {
-                setFloorCount();
-                System.out.println("Floors are empty by default. Want to add vehicle slots of each type?(y/n)");
-                if (scanner.next().equals("y"))
-                    floorsConfig();
+                if(getParking()) {
+                    setFloorCount();
+                    System.out.println("Floors are empty by default. Want to add vehicle slots of each type?(y/n)");
+                    if (scanner.next().equals("y"))
+                        floorsConfig();
+                }
+                else
+                    System.out.println("Can't reconfigure Parking Lot now" );
                 break;
             }
             case 2: {
@@ -115,7 +131,11 @@ public class ParkingLot implements CallMenu {
                 break;
             }
             case 3: {
-                floorsConfig();
+                if(getParking()) {
+                    floorsConfig();
+                }
+                else
+                    System.out.println("Can't reconfigure Parking Slot now" );
                 break;
             }
             case 4: {

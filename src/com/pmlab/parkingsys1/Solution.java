@@ -23,6 +23,7 @@ public class Solution {
                     //For Admin
                     System.out.println("ENTER ADMIN PASSWORD");
                     if (scanner.next().equals("1234")) {
+
                         parkingLot.showMenu();
                     } else {
                         System.out.println("Not Authorized!!!");
