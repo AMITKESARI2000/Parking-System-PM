@@ -24,6 +24,11 @@ public class Customer extends ParkingLot {
     private float bill = 0;
 
     Customer() {
+        setUsername();
+        setCustomerId();
+        setAccountBalance();
+        setVehicleType();
+        setPremiumSubscription();
     }
 
     //================IMPLEMENT OTHER FUNCTIONS======================
@@ -43,6 +48,9 @@ public class Customer extends ParkingLot {
         return vehicleType;
     }
 
+    public boolean getIsPremiumSubscription() {
+        return premiumSubscription;
+    }
 
     public void setCustomerId() {
         int n = 10;
@@ -58,24 +66,37 @@ public class Customer extends ParkingLot {
         }
         CustomerId = sb.toString();
 
-        System.out.println("Customer Id:" + CustomerId);
+        System.out.println("Customer ID:" + CustomerId);
     }
 
     public void setUsername() {
-        System.out.println("Please Enter User Name: ");
-        this.username = scanner.next();
+        try {
+            System.out.println("Please Enter User Name: ");
+            username = scanner.next();
+        } catch (Exception e) {
+            System.out.println("Please enter valid username");
+            setUsername();
+        }
     }
 
     public void setAccountBalance() {
-        System.out.println("Enter Account Balance for Validation of Payment: ");
-        this.accountBalance = scanner.nextFloat();
-        System.out.println("Added : " + accountBalance);
+        try {
+            System.out.println("Enter Account Balance for Validation of Payment: ");
+            accountBalance = Float.parseFloat(scanner.next());
+            if (accountBalance <= 0) {
+                System.out.println("Please enter valid balance amount");
+                setAccountBalance();
+            } else {
+                System.out.println("Added : " + accountBalance);
+            }
+        } catch (Exception e) {
+            System.out.println("Please enter valid input");
+            System.out.println("Balance set to 0 OR");
+            accountBalance=0;
+            setAccountBalance();
+        }
+
     }
-
-   /* public void setAccountBalance(float amount) {
-        accountBalance = amount;
-
-    }*/
 
     public void setVehicleType() {
         System.out.println("Choose Your Vehicle Type: ");
@@ -96,7 +117,7 @@ public class Customer extends ParkingLot {
                 vehicleType = "handicapped";
                 break;
             case 5:
-                vehicleType="Electric";
+                vehicleType = "electric";
                 break;
             default:
                 System.out.println("Enter valid number");
@@ -124,7 +145,7 @@ public class Customer extends ParkingLot {
             System.out.println("Enter valid number :(");
             return false;
         } else {
-            String check_status = floors.get(floor_no).bookSlot(vehicleType,floor_no);
+            String check_status = floors.get(floor_no).bookSlot(vehicleType, floor_no);
 
             if (!check_status.equals("")) {
                 System.out.println("Parking Slot has been allotted");
@@ -136,7 +157,7 @@ public class Customer extends ParkingLot {
                 setBill();
                 return true;
             } else {
-                System.out.println("Error in slot allotment");
+                System.out.println("Error in slot allotment. No slot of type " + vehicleType + " on this floor is free now.");
             }
             return false;
         }
@@ -168,18 +189,15 @@ public class Customer extends ParkingLot {
             baseRate = 40;
         } else if (vehicleType == "handicapped") {
             baseRate = 20;
-        }else if(vehicleType=="Electric") {
-            baseRate=30;
+        } else if (vehicleType == "Electric") {
+            baseRate = 30;
         }
         System.out.println("Enter Your Parking Stay Time (in hrs): ");
         stayTime = scanner.nextInt();
         System.out.println("Added " + stayTime + " hr parking time");
         if (stayTime > 0) {
-            System.out.printf("Please note: \n Base rate: Rs%f    Increment per hour: Rs%f", baseRate, interest);
+            System.out.printf("Please note: \n Base rate: Rs%.2f    Increment per hour: Rs%.2f", baseRate, interest);
             bill = baseRate + (stayTime - 1) * interest;
-
-            //Goutam add different base rate for different vehicle types
-
 
             if (premiumSubscription) {
                 System.out.println("\nThank you for being our premium member! 10% bill amount reduced.");
@@ -203,7 +221,7 @@ public class Customer extends ParkingLot {
     public void showMenu() {
 
         System.out.println("Choose your option:");
-        String[] functions = new String[]{"Enter User Data", "Book Parking Slot", "bill", "Pay and Exit Parking Slot", "Back", "Exit"};
+        String[] functions = new String[]{"Edit User Data", "Book Parking Slot", "Show Bill", "Pay and Exit Parking Slot", "Back", "Exit"};
         for (int i = 0; i < functions.length; i++) {
             System.out.println(i + 1 + ": " + functions[i]);
         }
@@ -228,18 +246,17 @@ public class Customer extends ParkingLot {
             case 2: {
                 setParkingLotCustomer();
                 showMenu();
-
                 break;
             }
             case 3: {
-                System.out.println("your bill is " + getBill());
+                System.out.println("Your bill is " + getBill());
                 showMenu();
                 break;
             }
             case 4: {
-                Payment pay=new Payment(bill,accountBalance,premiumSubscription);
+                Payment pay = new Payment(bill, accountBalance, premiumSubscription);
                 pay.showMenu();
-                accountBalance=pay.getAmount();
+                accountBalance = pay.getAmount();
                 exitParkingLotCustomer();
                 break;
             }

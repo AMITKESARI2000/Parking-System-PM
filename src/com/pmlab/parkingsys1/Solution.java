@@ -12,7 +12,7 @@ public class Solution {
         do {
             int option = 0;
             System.out.println("Choose your option:");
-            String[] functions = new String[]{"Admin Dash", "Customer Dash", "Exit"};
+            String[] functions = new String[]{"Admin Dash", "Customer Dash", "Exit Program"};
             for (int i = 0; i < functions.length; i++) {
                 System.out.println(i + 1 + ": " + functions[i]);
             }
@@ -34,25 +34,28 @@ public class Solution {
                     System.out.println("Hello Friendly User. Hope we make your stay pleasant ;)");
                     System.out.println("Are you an existing Customer (y/n)?");
                     String y = scanner.next();
+                    int i;
                     if (y.charAt(0) == 'y') {
                         System.out.println("Enter Username");
                         String userName = scanner.next();
-                        for (int i = 0; i < customerArrayList.size(); i++) {
+                        for (i = 0; i < customerArrayList.size(); i++) {
                             if (userName.equals(customerArrayList.get(i).getUsername())) {
                                 System.out.println("Username:" + userName);
-
                                 customerArrayList.get(i).showMenu();
                                 break;
-
                             }
+                        }
+                        if (i == customerArrayList.size()) {
+                            System.out.println("User does not exist. Add a new one:");
+                            Customer customer = new Customer();
+                            customerArrayList.add(customer);
+                            customer.showMenu();
                         }
                     } else {
                         Customer customer = new Customer();
                         customerArrayList.add(customer);
                         customer.showMenu();
                     }
-
-
                     break;
 
                 }
