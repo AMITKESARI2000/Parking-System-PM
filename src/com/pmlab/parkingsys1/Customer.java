@@ -283,7 +283,10 @@ public class Customer extends ParkingLot {
                 Payment pay = new Payment(bill, accountBalance, premiumSubscription);
                 pay.showMenu();
                 accountBalance = pay.getAmount();
+                if(pay.getPaymentStatus())
                 parkingStatus = !(exitParkingLotCustomer());
+                else
+                    System.out.println("Please pay the bill");
 
                 break;
             }
