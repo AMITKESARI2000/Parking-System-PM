@@ -1,13 +1,13 @@
 # Parking-System-PM
 ##Case Study-1
 ####Team 6: Team Members
-<ul>
-<li>CS19B003 - AMIT KESARI : Worked on Solution.Java, ParkingLot.Java, CallMenu (Interface)</li>
-<li>CS19B006 - BAINDLA GOUTHAM : Worked on Bill/Rate Calculation</li>
-<li>CS19B017 - PAVAN SAHITH : Worked on Payment.Java</li>
-<li>CS19B039 - SUMAN P : Worked on Customer.Java</li>
-<li>CS19B049 - POORNA SYAMA SUNDAR : Worked on Floor.java , VehicleSlot.java</li>
-</ul>
+
+* CS19B003 - AMIT KESARI : Worked on Solution.Java, ParkingLot.Java, CallMenu (Interface)
+* CS19B006 - BAINDLA GOUTHAM : Worked on Bill/Rate Calculation
+* CS19B017 - PAVAN SAHITH : Worked on Payment.Java
+* CS19B039 - SUMAN P : Worked on Customer.Java
+* CS19B049 - POORNA SYAMA SUNDAR : Worked on Floor.java , VehicleSlot.java</li>
+
 
 #####Solution.java
 * We have made Solution.java in which there is Admin Dash and Customer Dash.

@@ -11,7 +11,7 @@ public class ParkingLot implements CallMenu {
     static private int maxFloorCount = 15;
     static ArrayList<Floors> floors = new ArrayList<>(0);
 
-    long totalEarning = 0;
+    static private float totalEarning = 0;
 
     ParkingLot() {
         //Add 3 floors by default
@@ -70,7 +70,7 @@ public class ParkingLot implements CallMenu {
 
     //Display the details of Each Floor
     public void displayFloorDetails() {
-        if (floorCount <= 0) {
+        if (floorCount <= 0 || floors.size() <= 0) {
             System.out.println("Please Add Floors First!");
             return;
         }
@@ -89,6 +89,7 @@ public class ParkingLot implements CallMenu {
             System.out.println("No Customer in DataBase!");
             return;
         } else {
+            totalEarning = 0;
             System.out.println("Details: ");
             for (int i = 0; i < customerArrayList.size(); i++) {
                 if (customerArrayList.get(i).getCustomerId().equals("")) continue;
@@ -99,40 +100,48 @@ public class ParkingLot implements CallMenu {
                 System.out.printf("%-15s%15s\n", "Vehicle Type: ", customerArrayList.get(i).getvehicleType());
                 System.out.printf("%-15s%15s\n", "Premium Subscription: ", customerArrayList.get(i).getIsPremiumSubscription());
                 System.out.printf("%-15s%15s\n", "Bill Paid: ", customerArrayList.get(i).getBill());
-
+                totalEarning += customerArrayList.get(i).getBill();
                 System.out.println();
             }
+            System.out.println("Total bill collected : " + totalEarning);
         }
     }
 
     private int option = 0;
 
-    public boolean getParking()
-    {
-        for(int i=0;i<customerArrayList.size();i++) {
-            if(customerArrayList.get(i).getParkingStatus())
-            {
+    public boolean getParking() {
+        for (int i = 0; i < customerArrayList.size(); i++) {
+            if (customerArrayList.get(i).getParkingStatus()) {
                 return false;
             }
         }
-
         return true;
     }
-    public void reset(){
-        floorcount=3;
-        smallSlotCount=4;
-        largeSlotCount=4;
-        handicappedSlotCount=4;
-        motorCycleSlotCount=4;
-        electricSlotCount=4;
+
+    public void resetAll() {
+        System.out.println("Warning!!! This wil delete everything.");
+        System.out.println("Enter ADMIN password if you want to delete (else press any key)");
+        String resetString = scanner.next();
+        if (resetString.equals("1234")) {
+            floors.clear();
+            floorCount = 0;
+            customerArrayList.clear();
+            System.out.println("floor size: " + floors.size());
+            System.out.println("ERASED!");
+        }
+        return;
     }
 
     @Override
     public void showMenu() {
         try {
             System.out.println("Choose your option:");
+            System.out.println("Lot has " + floors.size() + " floors");
+            if(floors.size()==0){
+                System.out.println("Please add floors by going to option (1) first.");
+            }
             String[] functions = new String[]{"Set Floors", "Show Floor Details", "Configure Specific Floor",
-                    "Show Customer Details", "Back", "Exit Program"};
+                    "Show Customer Details", "Back", "Reset All", "Exit Program"};
             for (int i = 0; i < functions.length; i++) {
                 System.out.println(i + 1 + ": " + functions[i]);
             }
@@ -150,15 +159,14 @@ public class ParkingLot implements CallMenu {
         switch (option) {
             case 1: {
 
-                if(getParking()) {
+                if (getParking()) {
                     setFloorCount();
                     System.out.println("Parking Lot has " + floorCount + " floors by default having " + 4 + " slots of each type." +
                             " Want to change vehicle slots of each type?(y/n)");
                     if (scanner.next().equals("y"))
                         floorsConfig();
-                }
-                else
-                    System.out.println("Can't reconfigure Parking Lot now" );
+                } else
+                    System.out.println("Can't reconfigure Parking Lot now");
                 break;
             }
             case 2: {
@@ -167,11 +175,10 @@ public class ParkingLot implements CallMenu {
                 break;
             }
             case 3: {
-                if(getParking()) {
+                if (getParking()) {
                     floorsConfig();
-                }
-                else
-                    System.out.println("Can't reconfigure Parking Slot now" );
+                } else
+                    System.out.println("Can't reconfigure Parking Slot now");
                 break;
             }
             case 4: {
@@ -184,12 +191,13 @@ public class ParkingLot implements CallMenu {
                 break;
             }
             case 6: {
-                System.out.println("Tata Bye!!! Have a Great Day ;)");
-                System.exit(0);
+                resetAll();
+                showMainMenu();
                 break;
             }
-            case 7:{
-                reset();
+            case 7: {
+                System.out.println("Tata Bye!!! Have a Great Day ;)");
+                System.exit(0);
                 break;
             }
             default:
