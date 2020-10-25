@@ -287,6 +287,7 @@ public class Customer extends ParkingLot {
                 parkingStatus = !(exitParkingLotCustomer());
                 else
                     System.out.println("Please pay the bill");
+                    pay.showMenu();
 
                 break;
             }
