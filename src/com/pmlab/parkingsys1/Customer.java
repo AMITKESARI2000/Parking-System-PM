@@ -244,10 +244,7 @@ public class Customer extends ParkingLot {
     public void showMenu() {
 
         System.out.println("Choose your option:");
-<<<<<<< HEAD
-     //   System.out.println("Lot has " + floors.size() + " floors");
-=======
->>>>>>> 3a03494fdbf4f9224ef34950185558fb41719f36
+
         String[] functions = new String[]{"Edit User Data", "Display Available Slots", "Book Parking Slot", "Show Bill", "Pay and Exit Parking Slot", "Back", "Exit"};
         for (int i = 0; i < functions.length; i++) {
             System.out.println(i + 1 + ": " + functions[i]);

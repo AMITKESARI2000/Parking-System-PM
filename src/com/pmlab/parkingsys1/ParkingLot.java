@@ -161,7 +161,7 @@ public class ParkingLot implements CallMenu {
     public void showMenu() {
         try {
             System.out.println("Choose your option:");
-        //    System.out.println("Lot has " + floors.size() + " floors");
+
             if(floors.size()==0){
                 System.out.println("Please add floors by going to option (1) first.");
             }
