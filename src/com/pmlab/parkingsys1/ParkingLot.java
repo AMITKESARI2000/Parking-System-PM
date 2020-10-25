@@ -28,7 +28,7 @@ public class ParkingLot implements CallMenu {
         return floorCount;
     }
 
-    //Adds floors to Parking System
+    //Sets floors to Parking System
     public void setFloorCount() {
         try {
             floors.clear();
@@ -53,7 +53,30 @@ public class ParkingLot implements CallMenu {
             e.printStackTrace();
         }
     }
+    //Sets floors to Parking System (Overloaded)
+    public void setFloorCount(int floorCount) {
+        try {
+            floors.clear();
+            this.floorCount=floorCount;
+            if (floorCount >= 0) {
+                if (floorCount > maxFloorCount) {
+                    System.out.println("This is a commercial building. Max floors possible is:" + maxFloorCount);
+                    System.out.println("Setting Floor Count to max possible only");
+                    floorCount = maxFloorCount;
+                }
+                for (int i = 0; i < floorCount; i++) {
+                    Floors floor = new Floors();
+                    floors.add(floor);
+                }
 
+            } else {
+                System.out.println("Enter valid number of floors.");
+            }
+        } catch (Exception e) {
+            System.out.println("Enter valid input.");
+            e.printStackTrace();
+        }
+    }
 
     //Configure Specific Floor
     public static int floorChoice = 0;
@@ -124,8 +147,9 @@ public class ParkingLot implements CallMenu {
         System.out.println("Enter ADMIN password if you want to delete (else press any key)");
         String resetString = scanner.next();
         if (resetString.equals("1234")) {
-            floors.clear();
+
             floorCount = 0;
+            setFloorCount(floorCount);
             customerArrayList.clear();
             System.out.println("floor size: " + floors.size());
             System.out.println("ERASED!");

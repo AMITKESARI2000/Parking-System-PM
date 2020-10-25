@@ -150,28 +150,34 @@ public class Customer extends ParkingLot {
     //Assigns a vehicle slot to the customer according to his needs
     public boolean setParkingLotCustomer() {
         System.out.println("Current User: " + username);
-        System.out.println("Enter preferred floor ( 0 - " + (getFloorCount() - 1) + " )");
-        floor_no = scanner.nextInt();
-
-        if (getFloorCount() < floor_no || floor_no < 0) {
-            System.out.println("Enter valid number :(");
+        if ( floors.size() <= 0) {
+            System.out.println("Please Ask Admin to Add Floors First!");
             return false;
-        } else {
-            String check_status = floors.get(floor_no).bookSlot(vehicleType, floor_no);
+        }
+        else {
+            System.out.println("Enter preferred floor ( 0 - " + (getFloorCount() - 1) + " )");
+            floor_no = scanner.nextInt();
 
-            if (!check_status.equals("")) {
-                System.out.println("Parking Slot has been allotted");
-                System.out.println("Floor: " + floor_no);
-                System.out.println("Slot: " + vehicleType);
-                System.out.println("Parking Slot ID: " + check_status);
-                if (premiumSubscription)
-                    System.out.println("Enjoy your premium stay!");
-                setBill();
-                return true;
+            if (getFloorCount() < floor_no || floor_no < 0) {
+                System.out.println("Enter valid number :(");
+                return false;
             } else {
-                System.out.println("Error in slot allotment. No slot of type " + vehicleType + " on this floor is free now.");
+                String check_status = floors.get(floor_no).bookSlot(vehicleType, floor_no);
+
+                if (!check_status.equals("")) {
+                    System.out.println("Parking Slot has been allotted");
+                    System.out.println("Floor: " + floor_no);
+                    System.out.println("Slot: " + vehicleType);
+                    System.out.println("Parking Slot ID: " + check_status);
+                    if (premiumSubscription)
+                        System.out.println("Enjoy your premium stay!");
+                    setBill();
+                    return true;
+                } else {
+                    System.out.println("Error in slot allotment. No slot of type " + vehicleType + " on this floor is free now.");
+                }
+                return false;
             }
-            return false;
         }
     }
 
@@ -238,6 +244,7 @@ public class Customer extends ParkingLot {
     public void showMenu() {
 
         System.out.println("Choose your option:");
+        System.out.println("Lot has " + floors.size() + " floors");
         String[] functions = new String[]{"Edit User Data", "Display Available Slots", "Book Parking Slot", "Show Bill", "Pay and Exit Parking Slot", "Back", "Exit"};
         for (int i = 0; i < functions.length; i++) {
             System.out.println(i + 1 + ": " + functions[i]);

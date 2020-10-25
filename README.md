@@ -11,7 +11,7 @@
 
 #####Solution.java
 * We have made Solution.java in which there is Admin Dash and Customer Dash.
-* Admin Dash is for configuring the parking lot and setting up the floors.
+* Admin Dash is for configuring the parking lot and setting up the floors (Admin Password:1234).
 * Customer Dash is for getting information from the customer. The duplicity of the user is checked first.
 
 #####ParkingLot.java
