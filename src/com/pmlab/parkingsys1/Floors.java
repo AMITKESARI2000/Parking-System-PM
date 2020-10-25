@@ -20,6 +20,7 @@ public class Floors implements CallMenu {
     ArrayList<VehicleSlot> handicapped = new ArrayList<>(0);
     ArrayList<VehicleSlot> electric = new ArrayList<>(0);
 
+    //Constructor to add initial vehicle slots
     Floors() {
         //Add 4 vehicle slots of each type by default
         for (int i = 0; i < smallSlotCount; i++)

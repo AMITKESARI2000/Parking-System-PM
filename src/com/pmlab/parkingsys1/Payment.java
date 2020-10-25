@@ -10,6 +10,7 @@ public class Payment implements CallMenu {
     private boolean premiumSubscription = false;
     private float amount;
 
+    //Constructor for setting up initial values
     Payment(float bill, float balance, boolean premiumSubscription) {
         this.bill = bill;
         this.balance = balance;
@@ -17,6 +18,7 @@ public class Payment implements CallMenu {
         amount = balance;
     }
 
+    //Gets the account balance
     public float getAmount() {
         System.out.println("Account Balance:" + amount);
         return amount;
@@ -39,6 +41,7 @@ public class Payment implements CallMenu {
         }
     }
 
+    //Menu selection for payment method
     public void paymentMethod() {
         try {
             System.out.println("You can pay in 4 ways");
@@ -54,6 +57,7 @@ public class Payment implements CallMenu {
         }
     }
 
+    //Function invoker for payment method
     @Override
     public void functionInvoker(int option1) {
         switch (option1) {

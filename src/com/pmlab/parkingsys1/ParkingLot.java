@@ -13,6 +13,7 @@ public class ParkingLot implements CallMenu {
 
     static private float totalEarning = 0;
 
+    //Constructor to initialise everything
     ParkingLot() {
         //Add 3 floors by default
         for (int i = 0; i < floorCount; i++) {

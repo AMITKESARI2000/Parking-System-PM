@@ -53,6 +53,7 @@ public class Customer extends ParkingLot {
         return premiumSubscription;
     }
 
+    //Generates a customer ID when he registers
     public void setCustomerId() {
         int n = 10;
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -70,6 +71,7 @@ public class Customer extends ParkingLot {
         System.out.println("Customer ID:" + CustomerId);
     }
 
+    //Sets Username
     public void setUsername() {
         try {
             System.out.println("Please Enter User Name: ");
@@ -80,6 +82,7 @@ public class Customer extends ParkingLot {
         }
     }
 
+    //Sets user account balance
     public void setAccountBalance() {
         try {
             System.out.println("Enter Account Balance for Validation of Payment: ");
@@ -99,6 +102,7 @@ public class Customer extends ParkingLot {
 
     }
 
+    //Sets vehicle type customer has
     public void setVehicleType() {
         System.out.println("Choose Your Vehicle Type: ");
         for (int i = 0; i < vehicleTypes.length; i++) {
@@ -127,13 +131,14 @@ public class Customer extends ParkingLot {
         }
     }
 
+    //Sets premium subscription of customer (if he has enough money)
     public void setPremiumSubscription() {
         System.out.println("Are you our premium customer? (y/n)");
         String ps = scanner.next();
-        if (ps.toLowerCase().equals("y") && accountBalance > 1000) {
+        if (ps.toLowerCase().equals("y") && accountBalance > 500) {
             premiumSubscription = true;
             System.out.println("Verified!");
-        } else if (ps.equals("y") && accountBalance < 1000) {
+        } else if (ps.equals("y") && accountBalance < 500) {
             System.out.println("You are not a premium customer. Please don't fake it and buy a Subscription");
             premiumSubscription = false;
         } else {
@@ -142,6 +147,7 @@ public class Customer extends ParkingLot {
         }
     }
 
+    //Assigns a vehicle slot to the customer according to his needs
     public boolean setParkingLotCustomer() {
         System.out.println("Current User: " + username);
         System.out.println("Enter preferred floor ( 0 - " + (getFloorCount() - 1) + " )");
@@ -169,6 +175,7 @@ public class Customer extends ParkingLot {
         }
     }
 
+    //Exit parking lot
     public boolean exitParkingLotCustomer() {
         boolean check_status = false;
         if (username.equals("")) {
@@ -185,6 +192,7 @@ public class Customer extends ParkingLot {
         return check_status;
     }
 
+    //Sets the customer bill according to different rates , types etc
     public void setBill() {
         float baseRate = 20, interest = 10;
         if (vehicleType == "small") {
