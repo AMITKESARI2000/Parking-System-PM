@@ -9,6 +9,7 @@ public class Payment implements CallMenu {
     private float balance;
     private boolean premiumSubscription = false;
     private float amount;
+    private boolean paymentStatus=false;
 
     //Constructor for setting up initial values
     Payment(float bill, float balance, boolean premiumSubscription) {
@@ -56,6 +57,10 @@ public class Payment implements CallMenu {
             e.printStackTrace();
         }
     }
+    public boolean getPaymentStatus()
+    {
+        return paymentStatus;
+    }
 
     //Function invoker for payment method
     @Override
@@ -64,12 +69,14 @@ public class Payment implements CallMenu {
             //Add different functions below
             case 1: {
                 System.out.println("You paid: Rs " + bill);
+                paymentStatus=true;
                 break;
             }
             case 2: {
                 if (balance >= bill) {
                     System.out.println("Rs" + bill + " has been deducted from your credit card");
                     amount = balance - bill;
+                    paymentStatus=true;
                 } else {
                     System.out.println("Your account balance is not sufficient");
                     System.out.println("Select Another method of payment");
@@ -79,6 +86,7 @@ public class Payment implements CallMenu {
             }
             case 3: {
                 System.out.println("Rs" + bill + " should be paid to our attender");
+                paymentStatus=true;
                 break;
             }
             case 4: {
@@ -86,6 +94,7 @@ public class Payment implements CallMenu {
                     if (balance >= bill) {
                         System.out.println("Rs" + bill + " has been deducted from your premium account");
                         amount = balance - bill;
+                        paymentStatus=true;
                     }
                 } else {
                     System.out.println("Your account balance is not sufficient");
